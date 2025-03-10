@@ -5,12 +5,12 @@ import styles from "@/app/page.module.css";
 import { Input, Button } from "@geist-ui/core";
 import data from "./snippets.json";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { tomorrow } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 export default function Home() {
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const fetchGeminiResponse = async () => {
     if (!query.trim()) return;
@@ -46,19 +46,23 @@ export default function Home() {
     setLoading(false);
   };
 
+  const copyToClipboard = () => {
+    if (response) {
+      navigator.clipboard.writeText(response);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
+    }
+  };
+
   return (
     <div className={styles.content}>
-      <h1>Helpers</h1>
-      <h2>Notes</h2>
-      <p>Helper functions in Kotlin</p>
+      <h1>Android Studio Examples</h1>
 
       {/* Display Kotlin code snippets with syntax highlighting */}
       {data.snippets.map((snippet) => (
         <div key={snippet.codeblockTitle}>
-          <h3>{snippet.codeblockTitle}</h3>
-          <SyntaxHighlighter language="kotlin">
-            {snippet.code}
-          </SyntaxHighlighter>
+          <p>{snippet.codeblockTitle}</p>
+          <SyntaxHighlighter language="java">{snippet.code}</SyntaxHighlighter>
         </div>
       ))}
 
@@ -68,16 +72,49 @@ export default function Home() {
         onChange={(e) => setQuery(e.target.value)}
         width="100%"
       />
-      <Button className="bg-green-500" mt={1} onClick={fetchGeminiResponse} type="success" disabled={loading}>
-        {loading ? "Loading..." : "Help"}
-      </Button>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          marginTop: "1rem",
+          alignItems: "center",
+        }}
+      >
+        <Button
+          style={{
+            backgroundColor: "rgba(34, 197, 94, 0.5)", // Green with reduced opacity
+            color: "#ffffff",
+            border: "none",
+            padding: "8px 16px",
+            borderRadius: "5px",
+            cursor: "pointer",
+            opacity: 0.6,
+          }}
+          onClick={fetchGeminiResponse}
+          type="success"
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Help"}
+        </Button>
+        <Button
+          style={{
+            backgroundColor: "rgba(34, 197, 94, 0.5)", // Green with reduced opacity
+            color: "#ffffff",
+            border: "none",
+            padding: "8px 16px",
+            borderRadius: "5px",
+            cursor: "pointer",
+            opacity: 0.6,
+          }}
+          onClick={copyToClipboard}
+        >
+          {copied ? "Copied!" : "Copy"}
+        </Button>
+      </div>
 
       {response && (
-        // Display the Gemini response as formatted Python code.
-        <div style={{ marginTop: "1rem", overflowX:"auto"}}>
-          <SyntaxHighlighter language="python" style={tomorrow}>
-            {response}
-          </SyntaxHighlighter>
+        <div style={{ marginTop: "1rem", overflowX: "auto" }}>
+          <SyntaxHighlighter language="python">{response}</SyntaxHighlighter>
         </div>
       )}
     </div>
