@@ -1,0 +1,20 @@
+{
+  "snippets": [
+    {
+      "codeblockTitle": "Explicit Intent to Launch an Activity",
+      "code": "val intent = Intent(this, SecondActivity::class.java)\nstartActivity(intent)"
+    },
+    {
+      "codeblockTitle": "Passing Data with Intent",
+      "code": "val intent = Intent(this, DetailActivity::class.java)\nintent.putExtra(\"EXTRA_MESSAGE\", \"Hello, World!\")\nstartActivity(intent)"
+    },
+    {
+      "codeblockTitle": "Receiving Data in an Activity",
+      "code": "class DetailActivity : AppCompatActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_detail)\n\n        val message = intent.getStringExtra(\"EXTRA_MESSAGE\")\n        findViewById<TextView>(R.id.textView).text = message\n    }\n}"
+    },
+    {
+      "codeblockTitle": "Implicit Intent Example (Opening a URL)",
+      "code": "val url = \"https://www.example.com\"\nval intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))\nstartActivity(intent)"
+    }
+  ]
+}

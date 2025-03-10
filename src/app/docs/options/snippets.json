@@ -1,0 +1,12 @@
+{
+  "snippets": [
+    {
+      "codeblockTitle": "Menu Resource File (res/menu/menu_main.xml)",
+      "code": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<menu xmlns:android=\"http://schemas.android.com/apk/res/android\">\n    <!-- Menu item for Settings -->\n    <item\n        android:id=\"@+id/action_settings\"\n        android:title=\"Settings\"\n        android:orderInCategory=\"100\"\n        android:showAsAction=\"never\" />\n    \n    <!-- Menu item for About -->\n    <item\n        android:id=\"@+id/action_about\"\n        android:title=\"About\"\n        android:orderInCategory=\"101\"\n        android:showAsAction=\"never\" />\n</menu>\n\n<!-- Save this file as res/menu/menu_main.xml -->"
+    },
+    {
+      "codeblockTitle": "MainActivity - Inflating the Options Menu",
+      "code": "class MainActivity : AppCompatActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_main)\n        // Your initialization code here\n    }\n\n    // Inflate the options menu (app bar menu)\n    override fun onCreateOptionsMenu(menu: Menu?): Boolean {\n        // Use the menu inflater to inflate the menu_main.xml file\n        menuInflater.inflate(R.menu.menu_main, menu)\n        return true\n    }\n\n    // Handle menu item clicks\n    override fun onOptionsItemSelected(item: MenuItem): Boolean {\n        return when (item.itemId) {\n            R.id.action_settings -> {\n                // Handle Settings click\n                Toast.makeText(this, \"Settings clicked\", Toast.LENGTH_SHORT).show()\n                true\n            }\n            R.id.action_about -> {\n                // Handle About click\n                Toast.makeText(this, \"About clicked\", Toast.LENGTH_SHORT).show()\n                true\n            }\n            else -> super.onOptionsItemSelected(item)\n        }\n    }\n}\n\n/*\nPlace this code in your MainActivity.kt file (usually under app/src/main/java/your/package/name/MainActivity.kt).\nEnsure that you have created the menu_main.xml file in the res/menu folder as shown above.\n*/"
+    }
+  ]
+}

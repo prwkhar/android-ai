@@ -1,0 +1,8 @@
+{
+  "snippets": [
+    {
+      "codeblockTitle": "RadioGroup and Button Example",
+      "code": "class MainActivity : AppCompatActivity() {\n    private lateinit var radioGroup: RadioGroup\n    private lateinit var btnSubmit: Button\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_main)\n\n        radioGroup = findViewById(R.id.radioGroup)\n        btnSubmit = findViewById(R.id.btnSubmit)\n\n        btnSubmit.setOnClickListener {\n            val selectedId = radioGroup.checkedRadioButtonId\n            if (selectedId != -1) {\n                val selectedRadioButton = findViewById<RadioButton>(selectedId)\n                Toast.makeText(this, \"Selected: ${selectedRadioButton.text}\", Toast.LENGTH_SHORT).show()\n            } else {\n                Toast.makeText(this, \"Please select an option\", Toast.LENGTH_SHORT).show()\n            }\n        }\n    }\n}\n"
+    }
+  ]
+}

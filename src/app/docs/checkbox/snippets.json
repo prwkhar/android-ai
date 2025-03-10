@@ -1,0 +1,8 @@
+{
+  "snippets": [
+    {
+      "codeblockTitle": "Checkboxes Example",
+      "code": "class MainActivity : AppCompatActivity() {\n    private lateinit var checkBoxAndroid: CheckBox\n    private lateinit var checkBoxWeb: CheckBox\n    private lateinit var checkBoxAI: CheckBox\n    private lateinit var btnSubmit: Button\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_main)\n\n        checkBoxAndroid = findViewById(R.id.checkBoxAndroid)\n        checkBoxWeb = findViewById(R.id.checkBoxWeb)\n        checkBoxAI = findViewById(R.id.checkBoxAI)\n        btnSubmit = findViewById(R.id.btnSubmit)\n\n        btnSubmit.setOnClickListener {\n            val selectedOptions = mutableListOf<String>()\n\n            if (checkBoxAndroid.isChecked) selectedOptions.add(\"Android Development\")\n            if (checkBoxWeb.isChecked) selectedOptions.add(\"Web Development\")\n            if (checkBoxAI.isChecked) selectedOptions.add(\"Artificial Intelligence\")\n\n            if (selectedOptions.isNotEmpty()) {\n                Toast.makeText(this, \"Selected: ${selectedOptions.joinToString(\", \")}\", Toast.LENGTH_SHORT).show()\n            } else {\n                Toast.makeText(this, \"No options selected\", Toast.LENGTH_SHORT).show()\n            }\n        }\n    }\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "snippets": [
+    {
+      "codeblockTitle": "For Loop Example",
+      "code": "// Looping from 1 to 10 and printing each number\nfor (i in 1..10) {\n    println(\"Number: $i\")\n}\n\n// Looping through an array\nval fruits = arrayOf(\"Apple\", \"Banana\", \"Cherry\")\nfor (fruit in fruits) {\n    println(fruit)\n}"
+    },
+    {
+      "codeblockTitle": "Function Example",
+      "code": "// A simple function that greets the user\nfun greet(name: String): String {\n    return \"Hello, $name!\"\n}\n\n// Usage\nval greeting = greet(\"Alice\")\nprintln(greeting)  // Output: Hello, Alice!\n"
+    },
+    {
+      "codeblockTitle": "When Expression Example (Switch-Case Equivalent)",
+      "code": "// Using 'when' as a switch-case replacement in Kotlin\nfun getDayName(day: Int): String {\n    return when (day) {\n        1 -> \"Monday\"\n        2 -> \"Tuesday\"\n        3 -> \"Wednesday\"\n        4 -> \"Thursday\"\n        5 -> \"Friday\"\n        6 -> \"Saturday\"\n        7 -> \"Sunday\"\n        else -> \"Invalid day\"\n    }\n}\n\n// Usage\nprintln(getDayName(3))  // Output: Wednesday\n"
+    },
+    {
+      "codeblockTitle": "If-Else Example",
+      "code": "// A simple if-else statement example\nval number = 10\nif (number % 2 == 0) {\n    println(\"Even number\")\n} else {\n    println(\"Odd number\")\n}\n"
+    }
+  ]
+}

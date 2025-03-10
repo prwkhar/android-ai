@@ -1,0 +1,24 @@
+{
+  "snippets": [
+    {
+      "codeblockTitle": "MainActivity.kt - Launching SecondActivity",
+      "code": "package com.example.navigationapp\n\nimport android.content.Intent\nimport android.os.Bundle\nimport android.widget.Button\nimport androidx.appcompat.app.AppCompatActivity\n\nclass MainActivity : AppCompatActivity() {\n    private lateinit var btnNavigate: Button\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_main) // Ensure you have activity_main.xml in res/layout\n\n        btnNavigate = findViewById(R.id.btnNavigate)\n        btnNavigate.setOnClickListener {\n            // Navigate to SecondActivity using an explicit Intent\n            val intent = Intent(this, SecondActivity::class.java)\n            startActivity(intent)\n        }\n    }\n}\n"
+    },
+    {
+      "codeblockTitle": "SecondActivity.kt - Handling Up Navigation and Back Button",
+      "code": "package com.example.navigationapp\n\nimport android.os.Bundle\nimport android.view.MenuItem\nimport android.widget.Button\nimport android.widget.Toast\nimport androidx.appcompat.app.AppCompatActivity\n\nclass SecondActivity : AppCompatActivity() {\n    private lateinit var btnBack: Button\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_second) // Ensure you have activity_second.xml in res/layout\n\n        // Enable the Up button in the app bar\n        supportActionBar?.setDisplayHomeAsUpEnabled(true)\n\n        btnBack = findViewById(R.id.btnBack)\n        btnBack.setOnClickListener {\n            // Navigate back using finish()\n            finish()\n        }\n    }\n\n    // Handle Up button press in the app bar\n    override fun onOptionsItemSelected(item: MenuItem): Boolean {\n        return when (item.itemId) {\n            android.R.id.home -> {\n                finish()\n                true\n            }\n            else -> super.onOptionsItemSelected(item)\n        }\n    }\n\n    // Override the physical back button for custom behavior\n    override fun onBackPressed() {\n        Toast.makeText(this, \"Custom back navigation\", Toast.LENGTH_SHORT).show()\n        super.onBackPressed()\n    }\n}\n"
+    },
+    {
+      "codeblockTitle": "AndroidManifest.xml - Registering Activities",
+      "code": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    package=\"com.example.navigationapp\">\n\n    <application\n        android:allowBackup=\"true\"\n        android:icon=\"@mipmap/ic_launcher\"\n        android:label=\"NavigationApp\"\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/Theme.AppCompat.Light.DarkActionBar\">\n        <activity android:name=\".SecondActivity\" />\n        <activity android:name=\".MainActivity\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n                <category android:name=\"android.intent.category.LAUNCHER\" />\n            </intent-filter>\n        </activity>\n    </application>\n\n</manifest>\n"
+    },
+    {
+      "codeblockTitle": "activity_main.xml - Layout for MainActivity",
+      "code": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:orientation=\"vertical\"\n    android:gravity=\"center\"\n    tools:context=\".MainActivity\">\n\n    <!-- Button to navigate to SecondActivity -->\n    <Button\n        android:id=\"@+id/btnNavigate\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Go to Second Activity\" />\n\n</LinearLayout>\n"
+    },
+    {
+      "codeblockTitle": "activity_second.xml - Layout for SecondActivity",
+      "code": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:orientation=\"vertical\"\n    android:gravity=\"center\"\n    tools:context=\".SecondActivity\">\n\n    <!-- Button to navigate back to MainActivity -->\n    <Button\n        android:id=\"@+id/btnBack\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Go Back\" />\n\n</LinearLayout>\n"
+    }
+  ]
+}

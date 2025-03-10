@@ -1,0 +1,24 @@
+{
+  "snippets": [
+    {
+      "codeblockTitle": "Global DataStore",
+      "code": "object DataStore {\n    var totalExpense: Double = 0.0\n    var income: Double = 0.0\n}"
+    },
+    {
+      "codeblockTitle": "MainActivity with TabLayout and ViewPager2",
+      "code": "class MainActivity : AppCompatActivity() {\n\n    private lateinit var viewPager: ViewPager2\n    private lateinit var tabLayout: TabLayout\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_main)\n        \n        viewPager = findViewById(R.id.viewPager)\n        tabLayout = findViewById(R.id.tabLayout)\n        viewPager.adapter = ExpenseIncomePagerAdapter(this)\n\n        TabLayoutMediator(tabLayout, viewPager) { tab, position ->\n            tab.text = when (position) {\n                0 -> \"Expense\"\n                1 -> \"Income\"\n                else -> \"\"\n            }\n        }.attach()\n    }\n}\n\nclass ExpenseIncomePagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {\n    override fun getItemCount(): Int = 2\n\n    override fun createFragment(position: Int): Fragment =\n        when (position) {\n            0 -> ExpenseFragment()\n            1 -> IncomeFragment()\n            else -> ExpenseFragment()\n        }\n}"
+    },
+    {
+      "codeblockTitle": "ExpenseFragment",
+      "code": "class ExpenseFragment : Fragment() {\n\n    private lateinit var expense1: EditText\n    private lateinit var expense2: EditText\n    private lateinit var expense3: EditText\n    private lateinit var expense4: EditText\n    private lateinit var btnCalculate: Button\n\n    override fun onCreateView(\n        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?\n    ): View? {\n        val view = inflater.inflate(R.layout.fragment_expense, container, false)\n        expense1 = view.findViewById(R.id.expense1)\n        expense2 = view.findViewById(R.id.expense2)\n        expense3 = view.findViewById(R.id.expense3)\n        expense4 = view.findViewById(R.id.expense4)\n        btnCalculate = view.findViewById(R.id.btnCalculate)\n        return view\n    }\n\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\n        super.onViewCreated(view, savedInstanceState)\n        btnCalculate.setOnClickListener {\n            val exp1 = expense1.text.toString().toDoubleOrNull() ?: 0.0\n            val exp2 = expense2.text.toString().toDoubleOrNull() ?: 0.0\n            val exp3 = expense3.text.toString().toDoubleOrNull() ?: 0.0\n            val exp4 = expense4.text.toString().toDoubleOrNull() ?: 0.0\n\n            val totalExpense = exp1 + exp2 + exp3 + exp4\n            Toast.makeText(requireContext(), \"Total Expenses: $totalExpense\", Toast.LENGTH_SHORT).show()\n            \n            // Save the total expense for later use\n            DataStore.totalExpense = totalExpense\n        }\n    }\n}"
+    },
+    {
+      "codeblockTitle": "IncomeFragment",
+      "code": "class IncomeFragment : Fragment() {\n\n    private lateinit var etIncome: EditText\n    private lateinit var btnSubmit: Button\n\n    override fun onCreateView(\n        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?\n    ): View? {\n        val view = inflater.inflate(R.layout.fragment_income, container, false)\n        etIncome = view.findViewById(R.id.etIncome)\n        btnSubmit = view.findViewById(R.id.btnSubmit)\n        return view\n    }\n\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\n        super.onViewCreated(view, savedInstanceState)\n        btnSubmit.setOnClickListener {\n            val income = etIncome.text.toString().toDoubleOrNull() ?: 0.0\n            Toast.makeText(requireContext(), \"Income: $income\", Toast.LENGTH_SHORT).show()\n            \n            // Save the income\n            DataStore.income = income\n\n            // Navigate to the summary activity using Intent\n            val intent = Intent(requireContext(), SummaryActivity::class.java)\n            startActivity(intent)\n        }\n    }\n}"
+    },
+    {
+      "codeblockTitle": "SummaryActivity",
+      "code": "class SummaryActivity : AppCompatActivity() {\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_summary)\n\n        // Assuming you have TextViews to show income and expenses\n        val tvIncome: TextView = findViewById(R.id.tvIncome)\n        val tvExpense: TextView = findViewById(R.id.tvExpense)\n\n        tvIncome.text = \"Income: ${DataStore.income}\"\n        tvExpense.text = \"Expenses: ${DataStore.totalExpense}\"\n\n        val difference = DataStore.income - DataStore.totalExpense\n        Toast.makeText(this, \"Difference: $difference\", Toast.LENGTH_LONG).show()\n    }\n}"
+    }
+  ]
+}

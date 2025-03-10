@@ -1,0 +1,21 @@
+{
+    "snippets": [
+      {
+        "codeblockTitle": "For Loop Example",
+        "code": "// Looping from 1 to 10 and printing each number\nfor (i in 1..10) {\n    println(\"Number: $i\")\n}\n\n// Looping through an array\nval fruits = arrayOf(\"Apple\", \"Banana\", \"Cherry\")\nfor (fruit in fruits) {\n    println(fruit)\n}"
+      },
+      {
+        "codeblockTitle": "Function Example",
+        "code": "// A simple function in Kotlin\nfun greet(name: String): String {\n    return \"Hello, $name!\"\n}\n\n// Calling the function\nprintln(greet(\"Alice\"))"
+      },
+      {
+        "codeblockTitle": "Class Example",
+        "code": "// Defining a class in Kotlin\nclass Person(val name: String, val age: Int) {\n    fun introduce() {\n        println(\"Hi, I'm $name and I'm $age years old.\")\n    }\n}\n\n// Creating an instance and calling a method\nval person = Person(\"John\", 25)\nperson.introduce()"
+      },
+      {
+        "codeblockTitle": "Lambda Example",
+        "code": "// Lambda function in Kotlin\nval square: (Int) -> Int = { number -> number * number }\n\n// Using the lambda\nprintln(square(5)) // Output: 25"
+      }
+    ]
+  }
+  
