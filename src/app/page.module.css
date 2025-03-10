@@ -58,6 +58,7 @@
   padding: 0rem 1.5rem;
   min-height: 100vh;
   align-items: flex-start;
+  overflow: auto;
 }
 
 .main ol {
@@ -80,6 +81,7 @@
   padding: 2px 4px;
   border-radius: 4px;
   font-weight: 600;
+  overflow: scroll;
 }
 
 .sidebar {
@@ -87,8 +89,7 @@
   flex-shrink: 0; 
   height: 100vh; /* Full height */
   position: sticky; 
-  top: 80px; /* Sticks after the header */
-  overflow-y: auto; /* Enables scrolling */
+  top: 0px /* Sticks after the header */
 }
 
 

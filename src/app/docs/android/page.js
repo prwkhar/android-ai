@@ -74,7 +74,7 @@ export default function Home() {
 
       {response && (
         // Display the Gemini response as formatted Python code.
-        <div style={{ marginTop: "1rem" }}>
+        <div style={{ marginTop: "1rem", overflowX:"auto"}}>
           <SyntaxHighlighter language="python" style={tomorrow}>
             {response}
           </SyntaxHighlighter>
